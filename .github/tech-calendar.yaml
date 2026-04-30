@@ -5,6 +5,18 @@ earnings:
     name: "Tech Earnings Calendar"
     description: "Earnings dates for selected tickers."
     retention_years: 2
-  tickers: ["META", "NVDA", "MSFT", "AAPL", "AMZN", "GOOGL", "NFLX"]
+  tickers:
+    [
+      "INTC",
+      "MSFT",
+      "BABA",
+      "GOOGL",
+      "AMZN",
+      "NVDA",
+      "TSM",
+      "TSLA",
+      "AMD",
+      "AAPL",
+    ]
   days_ahead: 20
   days_past: 10

@@ -50,7 +50,7 @@ Source: Finnhub
 
 👉 Copy this link:
 ```
-https://raw.githubusercontent.com/eikendev/tech-calendar/refs/heads/public/calendar.ics
+https://raw.githubusercontent.com/bowencool/earnings-calendar/refs/heads/public/calendar.ics
 ```
 
 ### Apple Calendar (Mac / iPhone / iPad)
