@@ -43,16 +43,15 @@ class StorageBackend(ABC):
         """
         Select a backend based on the storage URL scheme.
         """
-        if not hasattr(location, "scheme"):
-            location = _URL_ADAPTER.validate_python(str(location))
+        resolved: AnyUrl = _URL_ADAPTER.validate_python(str(location))
 
-        scheme = location.scheme.lower()
+        scheme = resolved.scheme.lower()
 
         backend = cls._registry.get(scheme)
         if backend is None:
             raise StorageError(f"unsupported storage scheme: {scheme}")
 
-        return backend(location)
+        return backend(resolved)
 
     @abstractmethod
     def prepare(self) -> Path:
