@@ -8,9 +8,11 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import ClassVar
 
-from pydantic import AnyUrl
+from pydantic import AnyUrl, TypeAdapter
 
 from tech_calendar.exceptions import StorageError
+
+_URL_ADAPTER = TypeAdapter(AnyUrl)
 
 
 class StorageBackend(ABC):
@@ -37,10 +39,13 @@ class StorageBackend(ABC):
         self.location = location
 
     @classmethod
-    def from_location(cls, location: AnyUrl) -> StorageBackend:
+    def from_location(cls, location: AnyUrl | str) -> StorageBackend:
         """
         Select a backend based on the storage URL scheme.
         """
+        if not hasattr(location, "scheme"):
+            location = _URL_ADAPTER.validate_python(str(location))
+
         scheme = location.scheme.lower()
 
         backend = cls._registry.get(scheme)
