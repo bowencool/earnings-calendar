@@ -2,6 +2,7 @@
 SQLite connection management and schema initialization.
 """
 
+import contextlib
 import sqlite3
 from pathlib import Path
 
@@ -92,10 +93,8 @@ class Database:
                 """
             )
             # Migrate: add source_ticker column if upgrading from older schema.
-            self.conn.execute("ALTER TABLE earnings ADD COLUMN source_ticker TEXT")
+            with contextlib.suppress(sqlite3.OperationalError):
+                self.conn.execute("ALTER TABLE earnings ADD COLUMN source_ticker TEXT")
             self.conn.commit()
-        except sqlite3.OperationalError:
-            # Column already exists — ignore.
-            pass
         except sqlite3.Error as exc:
             raise StorageError(f"failed to initialize schema: {exc}") from exc

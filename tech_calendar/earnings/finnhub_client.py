@@ -113,12 +113,8 @@ def fetch_finnhub_earnings(
     complete coverage (the global calendar endpoint may omit entries on the
     free tier).  Otherwise falls back to a single global-calendar request.
     """
-    normalised: list[str] = (
-        [t.strip().upper() for t in tickers if t and t.strip()]
-        if tickers
-        else []
-    )
-    targets: list[str] = normalised if normalised else [""]
+    normalised: list[str] = [t.strip().upper() for t in tickers if t and t.strip()] if tickers else []
+    targets: list[str] = normalised or [""]
 
     client = finnhub.Client(api_key=api_key)
     try:
@@ -131,22 +127,23 @@ def fetch_finnhub_earnings(
                     "finnhub_response_validation_error",
                     extra={"error": str(exc), "symbol": symbol},
                 )
-                raise SystemExit(2) from exc
+                continue
             except Exception as exc:
                 logger.error(
                     "finnhub_fetch_failed",
                     extra={"error": str(exc), "symbol": symbol},
                 )
-                raise SystemExit(2) from exc
+                continue
 
             all_events.extend(
-                dc_replace(item.into(), ticker=symbol) if symbol else item.into()
-                for item in parsed.earnings_calendar
+                dc_replace(item.into(), ticker=symbol) if symbol else item.into() for item in parsed.earnings_calendar
             )
 
-            # Avoid hitting the 30 req/s hard limit when scaling to more tickers
+            # Avoid hitting the 30 req/min limit (Finnhub free tier).
+            # The tenacity retry handles transient 429s, but a short sleep
+            # keeps normal runs well within budget.
             if symbol != targets[-1]:
-                time.sleep(1.1)
+                time.sleep(2.1)
 
         return all_events
     finally:
