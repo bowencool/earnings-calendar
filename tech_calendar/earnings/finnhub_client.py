@@ -113,7 +113,7 @@ def fetch_finnhub_earnings(
     complete coverage (the global calendar endpoint may omit entries on the
     free tier).  Otherwise falls back to a single global-calendar request.
     """
-    normalised: list[str] = [t.strip().upper() for t in tickers if t and t.strip()] if tickers else []
+    normalised: list[str] = sorted({t.strip().upper() for t in tickers if t and t.strip()}) if tickers else []
     targets: list[str] = normalised or [""]
 
     client = finnhub.Client(api_key=api_key)
