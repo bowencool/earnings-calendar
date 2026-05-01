@@ -1,7 +1,7 @@
-"""Configuration helpers for tech-calendar."""
+"""Configuration helpers for earnings-calendar."""
 
-from tech_calendar.config.loader import find_config_file, load_config
-from tech_calendar.config.models import (
+from earnings_calendar.config.loader import find_config_file, load_config
+from earnings_calendar.config.models import (
     AppConfig,
     CalendarBase,
     EarningsCalendarConfig,

@@ -6,8 +6,8 @@ from dataclasses import dataclass
 from datetime import date
 from hashlib import sha256
 
-from tech_calendar.constants import DEFAULT_EARNINGS_RELCALID, UID_VERSION
-from tech_calendar.logging import get_logger
+from earnings_calendar.constants import DEFAULT_EARNINGS_RELCALID, UID_VERSION
+from earnings_calendar.logging import get_logger
 
 logger = get_logger(__name__)
 

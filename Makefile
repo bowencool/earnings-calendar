@@ -1,6 +1,6 @@
 UV ?= uv
 PYTHON ?= python3
-SRC := ./tech_calendar
+SRC := ./earnings_calendar
 TESTS := ./tests
 
 .PHONY: default

@@ -11,8 +11,8 @@ from zoneinfo import ZoneInfo
 from ics import Calendar, Event
 from ics.grammar.parse import ContentLine
 
-from tech_calendar.constants import EXCHANGE_TZ
-from tech_calendar.file_utils import write_text_file
+from earnings_calendar.constants import EXCHANGE_TZ
+from earnings_calendar.file_utils import write_text_file
 
 
 @dataclass(frozen=True)

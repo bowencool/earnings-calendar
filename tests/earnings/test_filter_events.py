@@ -6,8 +6,8 @@ from datetime import date
 
 import pytest
 
-from tech_calendar.earnings.models import EarningsEvent
-from tech_calendar.earnings.preprocessing import filter_events
+from earnings_calendar.earnings.models import EarningsEvent
+from earnings_calendar.earnings.preprocessing import filter_events
 
 
 @pytest.mark.parametrize(

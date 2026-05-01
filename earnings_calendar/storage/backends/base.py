@@ -10,7 +10,7 @@ from typing import ClassVar
 
 from pydantic import AnyUrl, TypeAdapter
 
-from tech_calendar.exceptions import StorageError
+from earnings_calendar.exceptions import StorageError
 
 _URL_ADAPTER = TypeAdapter(AnyUrl)
 

@@ -1,5 +1,5 @@
 """
-Custom exceptions for the tech-calendar application.
+Custom exceptions for the earnings-calendar application.
 """
 
 

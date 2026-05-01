@@ -120,6 +120,49 @@ wheels = [
 ]
 
 [[package]]
+name = "earnings-calendar"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "click" },
+    { name = "finnhub-python" },
+    { name = "ics" },
+    { name = "pydantic" },
+    { name = "pyyaml" },
+    { name = "structlog" },
+    { name = "tenacity" },
+    { name = "webdavclient3" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "bandit" },
+    { name = "pyrefly" },
+    { name = "pytest" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "click", specifier = ">=8.3.3" },
+    { name = "finnhub-python", specifier = ">=2.4.28" },
+    { name = "ics", specifier = ">=0.7.3" },
+    { name = "pydantic", specifier = ">=2.13.2" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
+    { name = "structlog", specifier = ">=25.4.0" },
+    { name = "tenacity", specifier = ">=9.1.2" },
+    { name = "webdavclient3", specifier = ">=3.14.7" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "bandit", specifier = ">=1.9.4" },
+    { name = "pyrefly", specifier = ">=0.61.1" },
+    { name = "pytest", specifier = ">=9.0.3" },
+    { name = "ruff", specifier = ">=0.15.11" },
+]
+
+[[package]]
 name = "finnhub-python"
 version = "2.4.28"
 source = { registry = "https://pypi.org/simple" }
@@ -514,49 +557,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/dc/0b/46725961e0b77e88352e60b9e78aef268cacd6dfae7f1527a348b0247606/tatsu-5.15.1.tar.gz", hash = "sha256:38b0467dbf086f032a7321023e65a773201c1acdebe0e9ac35c5ec26637e0b0d", size = 133908, upload-time = "2026-01-04T13:39:47.97Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e8/2f/7afdd76cac1511c456fdd880394cd54bc27ff5d991d3cb6b2ce0720b7d80/tatsu-5.15.1-py3-none-any.whl", hash = "sha256:3a1229eec55dcb1da7ae2842b1abf26bb746e92dc6734ab6785e84cecb465f06", size = 80069, upload-time = "2026-01-04T13:39:46.358Z" },
-]
-
-[[package]]
-name = "tech-calendar"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "click" },
-    { name = "finnhub-python" },
-    { name = "ics" },
-    { name = "pydantic" },
-    { name = "pyyaml" },
-    { name = "structlog" },
-    { name = "tenacity" },
-    { name = "webdavclient3" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "bandit" },
-    { name = "pyrefly" },
-    { name = "pytest" },
-    { name = "ruff" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "click", specifier = ">=8.3.3" },
-    { name = "finnhub-python", specifier = ">=2.4.28" },
-    { name = "ics", specifier = ">=0.7.3" },
-    { name = "pydantic", specifier = ">=2.13.2" },
-    { name = "pyyaml", specifier = ">=6.0.2" },
-    { name = "structlog", specifier = ">=25.4.0" },
-    { name = "tenacity", specifier = ">=9.1.2" },
-    { name = "webdavclient3", specifier = ">=3.14.7" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "bandit", specifier = ">=1.9.4" },
-    { name = "pyrefly", specifier = ">=0.61.1" },
-    { name = "pytest", specifier = ">=9.0.3" },
-    { name = "ruff", specifier = ">=0.15.11" },
 ]
 
 [[package]]

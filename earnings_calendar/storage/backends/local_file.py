@@ -9,8 +9,8 @@ from urllib.parse import unquote
 
 from pydantic import AnyUrl
 
-from tech_calendar.exceptions import StorageError
-from tech_calendar.storage.backends.base import StorageBackend
+from earnings_calendar.exceptions import StorageError
+from earnings_calendar.storage.backends.base import StorageBackend
 
 
 class LocalFileBackend(StorageBackend):

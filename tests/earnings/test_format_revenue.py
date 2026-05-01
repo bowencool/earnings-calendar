@@ -4,7 +4,7 @@ Tests for revenue formatting helper.
 
 import pytest
 
-from tech_calendar.earnings.models import _format_revenue
+from earnings_calendar.earnings.models import _format_revenue
 
 
 @pytest.mark.parametrize(

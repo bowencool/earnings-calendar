@@ -5,8 +5,8 @@ Tests for calendar all-day helper functions.
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
-from tech_calendar.calendar import _all_day_begin_local, _all_day_bounds
-from tech_calendar.constants import EXCHANGE_TZ
+from earnings_calendar.calendar import _all_day_begin_local, _all_day_bounds
+from earnings_calendar.constants import EXCHANGE_TZ
 
 
 def test_all_day_begin_local_uses_exchange_timezone():

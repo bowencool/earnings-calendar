@@ -18,8 +18,8 @@ from tenacity import (
     wait_exponential,
 )
 
-from tech_calendar.earnings.models import EarningsEvent
-from tech_calendar.logging import get_logger
+from earnings_calendar.earnings.models import EarningsEvent
+from earnings_calendar.logging import get_logger
 
 logger = get_logger(__name__)
 

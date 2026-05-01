@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>tech-calendar</h1>
+  <h1>earnings-calendar</h1>
   <h4 align="center">
     Subscribe-ready ICS feeds for earnings.
   </h4>
@@ -11,29 +11,13 @@
 
 ## ✨ What this is
 
-A calendar with **quarterly earnings dates of popular tech companies** with a horizon of the next 20 days
-
-### 📊 Companies included
-
-| Company            | Symbol |
-|--------------------|--------|
-| Alphabet (Google)  | GOOGL  |
-| Amazon             | AMZN   |
-| Apple              | AAPL   |
-| Meta               | META   |
-| Microsoft          | MSFT   |
-| Netflix            | NFLX   |
-| NVIDIA             | NVDA   |
+A calendar with **quarterly earnings dates** published as ICS feeds you can subscribe to. Tickers are fully configurable — any symbol supported by [Finnhub](https://finnhub.io/) can be added.
 
 ### 📝 Example event
 
-**Event name**
 ```
 NVDA Q2 Earnings
-```
-
-**Event details**
-```
+─────────────────
 Ticker: NVDA
 Fiscal Qtr: 2
 Estimate EPS: 1.0281
@@ -43,72 +27,51 @@ Source: Finnhub
 
 ## 📥 Subscribe
 
-## 📥 Add this calendar
-
 > [!TIP]
-> Subscribing with the link below keeps the calendar **updated automatically**, no re-imports needed. You can unsubscribe at any time.
+> Subscribing with the link below keeps the calendar **updated automatically**, no re-imports needed.
 
-👉 Copy this link:
 ```
 https://raw.githubusercontent.com/bowencool/earnings-calendar/refs/heads/public/calendar.ics
 ```
 
-### Apple Calendar (Mac / iPhone / iPad)
-- Mac: Calendar → File → New Calendar Subscription… → paste the ICS URL.
-- iPhone/iPad: Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar → paste the ICS URL.
+**Apple Calendar** — Calendar → File → New Calendar Subscription… → paste the URL.
 
-### Google Calendar
-- Open Google Calendar.
-- Left sidebar → Other calendars → From URL → paste the ICS URL → Add calendar.
+**Google Calendar** — Left sidebar → Other calendars → From URL → paste the URL.
 
-### Outlook
-- Open Outlook.
-- File → Account Settings → Internet Calendars → New… → paste the ICS URL → confirm.
+**Outlook** — File → Account Settings → Internet Calendars → New… → paste the URL.
 
-## 🚀 Install this tool
-
-Install tech-calendar using `uv`:
+## 🚀 Install & Run
 
 ```bash
-uv tool install tech-calendar
+# Install from source
+git clone https://github.com/bowencool/earnings-calendar.git
+cd earnings-calendar
+uv sync
+
+# Run
+uv run earnings-calendar --config .github/earnings-calendar.yaml earnings
 ```
 
-Install tech-calendar using `pip`:
+## ⚙️ Configuration
 
-```bash
-pip install tech-calendar
-```
-
-## ⚙️ Configure this tool
-
-Create a configuration file at `~/.config/tech-calendar/config.yaml`:
+Create a config file at `~/.config/earnings-calendar/config.yaml` (or pass `--config <path>`):
 
 ```yaml
-storage:
-  db_path: "file://tech_calendar.db" # or set TC_STORAGE_DB_PATH environment
-
 earnings:
-  calendar:
-    ics_path: "earnings.ics"
-    relcalid: "tech.calendar.earnings"
-    name: "Tech Earnings Calendar"
-    description: "Earnings dates for selected tickers."
-    retention_years: 5
-  tickers: ["AAPL", "MSFT", "GOOG"]
-  api_key: <your API key>  # or set TC_FINNHUB_API_KEY environment
+  tickers: ["AAPL", "MSFT", "GOOG", "NVDA"]   # any Finnhub-supported symbols
+  api_key: <your API key>                       # or set TC_FINNHUB_API_KEY
   days_ahead: 20
   days_past: 10
+  calendar:
+    ics_path: "earnings.ics"
+    name: "Earnings Calendar"
 ```
 
-`db_path` supports `file://` and `webdav://` URLs. You can also set `TC_STORAGE_DB_PATH` to override the configuration file.
-Example WebDAV value:
-`webdav://https://user:pass@webdav.example.com/calendars/tech_calendar.db`
-Note: the WebDAV backend does not create directories, so the parent folder must already exist.
+### Environment variables
 
-## 🏃 Run this tool
+| Variable | Description |
+|---|---|
+| `TC_FINNHUB_API_KEY` | Finnhub API key (overrides `api_key` in config) |
+| `TC_STORAGE_DB_PATH` | Storage path, supports `file://` and `webdav://` (optional, defaults to `file://earnings_calendar.db`) |
 
-Run the earnings workflow:
-
-```bash
-tech-calendar earnings
-```
+> The WebDAV backend does not create directories, so the parent folder must already exist.

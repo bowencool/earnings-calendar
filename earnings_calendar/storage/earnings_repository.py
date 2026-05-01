@@ -6,9 +6,9 @@ import sqlite3
 from collections.abc import Iterable
 from datetime import UTC, date, datetime
 
-from tech_calendar.earnings.models import EarningsEvent
-from tech_calendar.exceptions import StorageError
-from tech_calendar.logging import get_logger
+from earnings_calendar.earnings.models import EarningsEvent
+from earnings_calendar.exceptions import StorageError
+from earnings_calendar.logging import get_logger
 
 logger = get_logger(__name__)
 

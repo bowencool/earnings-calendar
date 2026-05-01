@@ -1,7 +1,7 @@
 [project]
-name = "tech-calendar"
+name = "earnings-calendar"
 version = "0.1.0"
-description = "iCalendar (.ics) with earnings dates for selected tech tickers"
+description = "iCalendar (.ics) with earnings dates for selected tickers"
 readme = "README.md"
 license-files = ["LICENSE"]
 requires-python = ">=3.13"
@@ -21,17 +21,17 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/eikendev/tech-calendar"
+Homepage = "https://github.com/eikendev/earnings-calendar"
 
 [project.scripts]
-tech-calendar = "tech_calendar.cli:cli"
+earnings-calendar = "earnings_calendar.cli:cli"
 
 [build-system]
 requires = ["setuptools>=82.0.1"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["tech_calendar"]
+packages = ["earnings_calendar"]
 
 [tool.ruff]
 line-length = 120

@@ -1,5 +1,5 @@
 """
-Configuration models for tech-calendar.
+Configuration models for earnings-calendar.
 """
 
 from collections.abc import Iterable
@@ -8,7 +8,7 @@ from typing import Annotated
 
 from pydantic import AnyUrl, BaseModel, Field, UrlConstraints, field_validator
 
-from tech_calendar.constants import (
+from earnings_calendar.constants import (
     DEFAULT_DB_PATH,
     DEFAULT_EARNINGS_CALENDAR_DESCRIPTION,
     DEFAULT_EARNINGS_CALENDAR_NAME,

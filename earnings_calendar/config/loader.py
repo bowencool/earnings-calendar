@@ -1,4 +1,4 @@
-"""YAML configuration loader for tech-calendar."""
+"""YAML configuration loader for earnings-calendar."""
 
 from __future__ import annotations
 
@@ -10,10 +10,10 @@ from typing import Any
 import yaml
 from pydantic import ValidationError
 
-from tech_calendar.config.models import AppConfig, StorageConfig
-from tech_calendar.constants import CONFIG_DIR_NAME, DEFAULT_CONFIG_CANDIDATES, ENV_DB_PATH
-from tech_calendar.exceptions import ConfigError
-from tech_calendar.logging import get_logger
+from earnings_calendar.config.models import AppConfig, StorageConfig
+from earnings_calendar.constants import CONFIG_DIR_NAME, DEFAULT_CONFIG_CANDIDATES, ENV_DB_PATH
+from earnings_calendar.exceptions import ConfigError
+from earnings_calendar.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -131,7 +131,7 @@ def find_config_file(config_path: Path | None = None) -> Path:
 
 
 def load_config(config_path: Path | None = None) -> AppConfig:
-    """Load the tech-calendar YAML configuration."""
+    """Load the earnings-calendar YAML configuration."""
     resolved_path = find_config_file(config_path)
     config = _load_config_from_file(resolved_path)
     return _apply_env_overrides(config)

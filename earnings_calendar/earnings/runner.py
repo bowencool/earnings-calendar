@@ -5,14 +5,14 @@ Earnings calendar orchestration.
 from datetime import date, timedelta
 from pathlib import Path
 
-from tech_calendar.api_keys import resolve_api_key
-from tech_calendar.calendar import CalendarMetadata, build_and_write_calendar, make_all_day_event
-from tech_calendar.config import AppConfig
-from tech_calendar.constants import ENV_FINNHUB_API_KEY
-from tech_calendar.earnings.finnhub_client import fetch_finnhub_earnings
-from tech_calendar.earnings.preprocessing import filter_events
-from tech_calendar.logging import get_logger
-from tech_calendar.storage import Database, EarningsRepository
+from earnings_calendar.api_keys import resolve_api_key
+from earnings_calendar.calendar import CalendarMetadata, build_and_write_calendar, make_all_day_event
+from earnings_calendar.config import AppConfig
+from earnings_calendar.constants import ENV_FINNHUB_API_KEY
+from earnings_calendar.earnings.finnhub_client import fetch_finnhub_earnings
+from earnings_calendar.earnings.preprocessing import filter_events
+from earnings_calendar.logging import get_logger
+from earnings_calendar.storage import Database, EarningsRepository
 
 logger = get_logger(__name__)
 

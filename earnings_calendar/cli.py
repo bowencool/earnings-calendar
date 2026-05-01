@@ -1,5 +1,5 @@
 """
-Command-line interface for tech-calendar.
+Command-line interface for earnings-calendar.
 """
 
 from datetime import date
@@ -8,11 +8,11 @@ from typing import Protocol
 
 import click
 
-from tech_calendar.config import AppConfig, find_config_file, load_config
-from tech_calendar.constants import CLI_ENV_PREFIX
-from tech_calendar.earnings.runner import run_earnings
-from tech_calendar.exceptions import ConfigError, OrchestrationError, StorageError
-from tech_calendar.logging import configure_logging, get_logger
+from earnings_calendar.config import AppConfig, find_config_file, load_config
+from earnings_calendar.constants import CLI_ENV_PREFIX
+from earnings_calendar.earnings.runner import run_earnings
+from earnings_calendar.exceptions import ConfigError, OrchestrationError, StorageError
+from earnings_calendar.logging import configure_logging, get_logger
 
 logger = get_logger(__name__)
 

@@ -8,9 +8,9 @@ from pathlib import Path
 
 from pydantic import AnyUrl
 
-from tech_calendar.exceptions import StorageError
-from tech_calendar.logging import get_logger
-from tech_calendar.storage.backends import StorageBackend
+from earnings_calendar.exceptions import StorageError
+from earnings_calendar.logging import get_logger
+from earnings_calendar.storage.backends import StorageBackend
 
 logger = get_logger(__name__)
 

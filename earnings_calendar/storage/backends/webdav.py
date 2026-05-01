@@ -14,9 +14,9 @@ from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_ex
 from webdav3.client import Client
 from webdav3.exceptions import WebDavException
 
-from tech_calendar.exceptions import StorageError
-from tech_calendar.logging import get_logger
-from tech_calendar.storage.backends.base import StorageBackend
+from earnings_calendar.exceptions import StorageError
+from earnings_calendar.logging import get_logger
+from earnings_calendar.storage.backends.base import StorageBackend
 
 logger = get_logger(__name__)
 _TARGET_URL = TypeAdapter(HttpUrl)

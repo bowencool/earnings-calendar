@@ -4,7 +4,7 @@ File utilities for writing output artifacts.
 
 from pathlib import Path
 
-from tech_calendar.logging import get_logger
+from earnings_calendar.logging import get_logger
 
 logger = get_logger(__name__)
 

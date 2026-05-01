@@ -1,5 +1,5 @@
 """
-Logging configuration for the tech-calendar application.
+Logging configuration for the earnings-calendar application.
 """
 
 import logging
@@ -33,7 +33,7 @@ def configure_logging(log_level_str: str = "INFO") -> None:
     )
 
     for logger_name in logging.root.manager.loggerDict:
-        if not logger_name.startswith("tech_calendar"):
+        if not logger_name.startswith("earnings_calendar"):
             logging.getLogger(logger_name).setLevel(logging.WARNING)
 
     structlog.configure(

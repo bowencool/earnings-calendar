@@ -1,8 +1,8 @@
 earnings:
   calendar:
     ics_path: "calendar.ics"
-    relcalid: "tech.calendar.earnings"
-    name: "Tech Earnings Calendar"
+    relcalid: "earnings.calendar.earnings"
+    name: "Earnings Calendar"
     description: "Earnings dates for selected tickers."
     retention_years: 1
   tickers:

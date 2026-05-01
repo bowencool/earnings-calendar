@@ -4,7 +4,7 @@ Preprocessing helpers for earnings events.
 
 from collections.abc import Iterable
 
-from tech_calendar.earnings.models import EarningsEvent
+from earnings_calendar.earnings.models import EarningsEvent
 
 
 def filter_events(events: Iterable[EarningsEvent], allowed: Iterable[str] | None) -> list[EarningsEvent]:
