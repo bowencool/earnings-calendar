@@ -3,6 +3,7 @@ Finnhub client integration for earnings retrieval.
 """
 
 import contextlib
+import time
 from dataclasses import replace as dc_replace
 from datetime import date
 
@@ -142,6 +143,10 @@ def fetch_finnhub_earnings(
                 dc_replace(item.into(), ticker=symbol) if symbol else item.into()
                 for item in parsed.earnings_calendar
             )
+
+            # Avoid hitting the 30 req/s hard limit when scaling to more tickers
+            if symbol != targets[-1]:
+                time.sleep(1.1)
 
         return all_events
     finally:
