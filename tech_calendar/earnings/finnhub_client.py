@@ -3,6 +3,8 @@ Finnhub client integration for earnings retrieval.
 """
 
 import contextlib
+import time
+from dataclasses import replace as dc_replace
 from datetime import date
 
 import finnhub
@@ -63,6 +65,7 @@ class FinnhubEarningsItem(BaseModel):
             eps_estimate=self.eps_estimate,
             revenue_estimate=self.revenue_estimate,
             source="Finnhub",
+            source_ticker=self.symbol.strip().upper(),
         )
 
 
@@ -84,39 +87,67 @@ def _retry_on_status_error(exc: BaseException) -> bool:
     wait=wait_exponential(multiplier=1.5, min=1, max=20),
     retry=retry_if_exception_type(FinnhubRequestException) | retry_if_exception(_retry_on_status_error),
 )
-def _get_validated_response(start: date, end: date, api_key: str) -> FinnhubResponse:
+def _get_validated_response(client: finnhub.Client, start: date, end: date, *, symbol: str = "") -> FinnhubResponse:
     """
     Call the official SDK and strictly validate the response with Pydantic.
     """
-    client = finnhub.Client(api_key=api_key)
-    try:
-        payload = client.earnings_calendar(
-            _from=start.isoformat(),
-            to=end.isoformat(),
-            symbol="",
-            international=False,
-        )
-    finally:
-        close_func = getattr(client, "close", None)
-        if callable(close_func):
-            # Do not mask upstream errors with close failures
-            with contextlib.suppress(Exception):
-                close_func()
-
+    payload = client.earnings_calendar(
+        _from=start.isoformat(),
+        to=end.isoformat(),
+        symbol=symbol,
+        international=False,
+    )
     return FinnhubResponse.model_validate(payload)
 
 
-def fetch_finnhub_earnings(start: date, end: date, api_key: str) -> list[EarningsEvent]:
+def fetch_finnhub_earnings(
+    start: date,
+    end: date,
+    api_key: str,
+    tickers: list[str] | None = None,
+) -> list[EarningsEvent]:
     """
     Fetch earnings across the date window from Finnhub via the official SDK.
-    """
-    try:
-        parsed = _get_validated_response(start, end, api_key)
-    except ValidationError as exc:
-        logger.error("finnhub_response_validation_error", extra={"error": str(exc)})
-        raise SystemExit(2) from exc
-    except Exception as exc:
-        logger.error("finnhub_fetch_failed", extra={"error": str(exc)})
-        raise SystemExit(2) from exc
 
-    return [item.into() for item in parsed.earnings_calendar]
+    When ``tickers`` is provided, fetches each ticker individually to guarantee
+    complete coverage (the global calendar endpoint may omit entries on the
+    free tier).  Otherwise falls back to a single global-calendar request.
+    """
+    normalised: list[str] = sorted({t.strip().upper() for t in tickers if t and t.strip()}) if tickers else []
+    targets: list[str] = normalised or [""]
+
+    client = finnhub.Client(api_key=api_key)
+    try:
+        all_events: list[EarningsEvent] = []
+        for symbol in targets:
+            try:
+                parsed = _get_validated_response(client, start, end, symbol=symbol)
+            except ValidationError as exc:
+                logger.error(
+                    "finnhub_response_validation_error",
+                    extra={"error": str(exc), "symbol": symbol},
+                )
+                continue
+            except Exception as exc:
+                logger.error(
+                    "finnhub_fetch_failed",
+                    extra={"error": str(exc), "symbol": symbol},
+                )
+                continue
+
+            all_events.extend(
+                dc_replace(item.into(), ticker=symbol) if symbol else item.into() for item in parsed.earnings_calendar
+            )
+
+            # Avoid hitting the 30 req/min limit (Finnhub free tier).
+            # The tenacity retry handles transient 429s, but a short sleep
+            # keeps normal runs well within budget.
+            if symbol != targets[-1]:
+                time.sleep(2.1)
+
+        return all_events
+    finally:
+        close_func = getattr(client, "close", None)
+        if callable(close_func):
+            with contextlib.suppress(Exception):
+                close_func()

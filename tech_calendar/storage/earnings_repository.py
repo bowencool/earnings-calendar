@@ -41,6 +41,7 @@ class EarningsRepository:
                     event.eps_estimate,
                     event.revenue_estimate,
                     event.source,
+                    event.source_ticker,
                     now,
                     now,
                 )
@@ -57,15 +58,17 @@ class EarningsRepository:
                     eps_estimate,
                     revenue_estimate,
                     source,
+                    source_ticker,
                     created_at,
                     updated_at
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(ticker, fiscal_year, quarter) DO UPDATE SET
                     event_date=excluded.event_date,
                     eps_estimate=excluded.eps_estimate,
                     revenue_estimate=excluded.revenue_estimate,
                     source=excluded.source,
+                    source_ticker=excluded.source_ticker,
                     updated_at=excluded.updated_at
                 """,
                 payload,
@@ -89,7 +92,8 @@ class EarningsRepository:
                     event_date,
                     eps_estimate,
                     revenue_estimate,
-                    source
+                    source,
+                    source_ticker
                 FROM earnings
                 WHERE fiscal_year >= ?
                 """,
@@ -113,6 +117,7 @@ class EarningsRepository:
                     eps_estimate=row[4],
                     revenue_estimate=row[5],
                     source=row[6],
+                    source_ticker=row[7],
                 )
             )
 

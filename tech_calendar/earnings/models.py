@@ -25,6 +25,7 @@ class EarningsEvent:
     eps_estimate: float | None = None
     revenue_estimate: float | None = None
     source: str | None = None
+    source_ticker: str | None = None
 
     def event_year(self) -> int:
         """
@@ -58,6 +59,8 @@ class EarningsEvent:
             f"Est. Revenue: {_format_revenue(self.revenue_estimate)}",
             f"Source: {self.source or '-'}",
         ]
+        if self.source_ticker and self.source_ticker != self.ticker:
+            details.append(f"Source Symbol: {self.source_ticker}")
         return "\n".join(details)
 
 
