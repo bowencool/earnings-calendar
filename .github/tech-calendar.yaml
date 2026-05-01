@@ -17,6 +17,12 @@ earnings:
       "TSLA",
       "AMD",
       "AAPL",
+      "KO",
+      "BRK.B",
+      "NVO",
+      "HSAI",
+      "PDD",
+      "XPEV",
     ]
   days_ahead: 20
   days_past: 10
