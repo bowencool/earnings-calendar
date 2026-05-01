@@ -84,7 +84,7 @@ def _retry_on_status_error(exc: BaseException) -> bool:
     wait=wait_exponential(multiplier=1.5, min=1, max=20),
     retry=retry_if_exception_type(FinnhubRequestException) | retry_if_exception(_retry_on_status_error),
 )
-def _get_validated_response(start: date, end: date, api_key: str) -> FinnhubResponse:
+def _get_validated_response(start: date, end: date, api_key: str, *, symbol: str = "") -> FinnhubResponse:
     """
     Call the official SDK and strictly validate the response with Pydantic.
     """
@@ -93,7 +93,7 @@ def _get_validated_response(start: date, end: date, api_key: str) -> FinnhubResp
         payload = client.earnings_calendar(
             _from=start.isoformat(),
             to=end.isoformat(),
-            symbol="",
+            symbol=symbol,
             international=False,
         )
     finally:
@@ -106,17 +106,57 @@ def _get_validated_response(start: date, end: date, api_key: str) -> FinnhubResp
     return FinnhubResponse.model_validate(payload)
 
 
-def fetch_finnhub_earnings(start: date, end: date, api_key: str) -> list[EarningsEvent]:
+def fetch_finnhub_earnings(
+    start: date,
+    end: date,
+    api_key: str,
+    tickers: list[str] | None = None,
+) -> list[EarningsEvent]:
     """
     Fetch earnings across the date window from Finnhub via the official SDK.
-    """
-    try:
-        parsed = _get_validated_response(start, end, api_key)
-    except ValidationError as exc:
-        logger.error("finnhub_response_validation_error", extra={"error": str(exc)})
-        raise SystemExit(2) from exc
-    except Exception as exc:
-        logger.error("finnhub_fetch_failed", extra={"error": str(exc)})
-        raise SystemExit(2) from exc
 
-    return [item.into() for item in parsed.earnings_calendar]
+    When ``tickers`` is provided, fetches each ticker individually to guarantee
+    complete coverage (the global calendar endpoint may omit entries on the
+    free tier).  Otherwise falls back to a single global-calendar request.
+    """
+    normalised: list[str] = (
+        [t.strip().upper() for t in tickers if t and t.strip()]
+        if tickers
+        else []
+    )
+
+    all_events: list[EarningsEvent] = []
+
+    # Fetch per-ticker to guarantee results for every configured symbol.
+    for symbol in normalised:
+        try:
+            parsed = _get_validated_response(start, end, api_key, symbol=symbol)
+        except ValidationError as exc:
+            logger.error(
+                "finnhub_response_validation_error",
+                extra={"error": str(exc), "symbol": symbol},
+            )
+            raise SystemExit(2) from exc
+        except Exception as exc:
+            logger.error(
+                "finnhub_fetch_failed",
+                extra={"error": str(exc), "symbol": symbol},
+            )
+            raise SystemExit(2) from exc
+
+        all_events.extend(item.into() for item in parsed.earnings_calendar)
+
+    # Also fetch the global calendar to pick up any other interesting events.
+    if not normalised:
+        try:
+            parsed = _get_validated_response(start, end, api_key)
+        except ValidationError as exc:
+            logger.error("finnhub_response_validation_error", extra={"error": str(exc)})
+            raise SystemExit(2) from exc
+        except Exception as exc:
+            logger.error("finnhub_fetch_failed", extra={"error": str(exc)})
+            raise SystemExit(2) from exc
+
+        all_events.extend(item.into() for item in parsed.earnings_calendar)
+
+    return all_events

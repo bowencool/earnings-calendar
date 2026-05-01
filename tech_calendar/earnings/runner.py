@@ -46,7 +46,7 @@ def run_earnings(config: AppConfig, *, today: date | None = None) -> Path:
         },
     )
 
-    events = fetch_finnhub_earnings(start, end, api_key)
+    events = fetch_finnhub_earnings(start, end, api_key, tickers=config.earnings.tickers)
     selected_events = filter_events(events, config.earnings.tickers)
 
     with Database(db_path) as db:
