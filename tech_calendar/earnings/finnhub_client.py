@@ -84,25 +84,16 @@ def _retry_on_status_error(exc: BaseException) -> bool:
     wait=wait_exponential(multiplier=1.5, min=1, max=20),
     retry=retry_if_exception_type(FinnhubRequestException) | retry_if_exception(_retry_on_status_error),
 )
-def _get_validated_response(start: date, end: date, api_key: str, *, symbol: str = "") -> FinnhubResponse:
+def _get_validated_response(client: finnhub.Client, start: date, end: date, *, symbol: str = "") -> FinnhubResponse:
     """
     Call the official SDK and strictly validate the response with Pydantic.
     """
-    client = finnhub.Client(api_key=api_key)
-    try:
-        payload = client.earnings_calendar(
-            _from=start.isoformat(),
-            to=end.isoformat(),
-            symbol=symbol,
-            international=False,
-        )
-    finally:
-        close_func = getattr(client, "close", None)
-        if callable(close_func):
-            # Do not mask upstream errors with close failures
-            with contextlib.suppress(Exception):
-                close_func()
-
+    payload = client.earnings_calendar(
+        _from=start.isoformat(),
+        to=end.isoformat(),
+        symbol=symbol,
+        international=False,
+    )
     return FinnhubResponse.model_validate(payload)
 
 
@@ -124,39 +115,32 @@ def fetch_finnhub_earnings(
         if tickers
         else []
     )
+    targets: list[str] = normalised if normalised else [""]
 
-    all_events: list[EarningsEvent] = []
+    client = finnhub.Client(api_key=api_key)
+    try:
+        all_events: list[EarningsEvent] = []
+        for symbol in targets:
+            try:
+                parsed = _get_validated_response(client, start, end, symbol=symbol)
+            except ValidationError as exc:
+                logger.error(
+                    "finnhub_response_validation_error",
+                    extra={"error": str(exc), "symbol": symbol},
+                )
+                raise SystemExit(2) from exc
+            except Exception as exc:
+                logger.error(
+                    "finnhub_fetch_failed",
+                    extra={"error": str(exc), "symbol": symbol},
+                )
+                raise SystemExit(2) from exc
 
-    # Fetch per-ticker to guarantee results for every configured symbol.
-    for symbol in normalised:
-        try:
-            parsed = _get_validated_response(start, end, api_key, symbol=symbol)
-        except ValidationError as exc:
-            logger.error(
-                "finnhub_response_validation_error",
-                extra={"error": str(exc), "symbol": symbol},
-            )
-            raise SystemExit(2) from exc
-        except Exception as exc:
-            logger.error(
-                "finnhub_fetch_failed",
-                extra={"error": str(exc), "symbol": symbol},
-            )
-            raise SystemExit(2) from exc
+            all_events.extend(item.into() for item in parsed.earnings_calendar)
 
-        all_events.extend(item.into() for item in parsed.earnings_calendar)
-
-    # Also fetch the global calendar to pick up any other interesting events.
-    if not normalised:
-        try:
-            parsed = _get_validated_response(start, end, api_key)
-        except ValidationError as exc:
-            logger.error("finnhub_response_validation_error", extra={"error": str(exc)})
-            raise SystemExit(2) from exc
-        except Exception as exc:
-            logger.error("finnhub_fetch_failed", extra={"error": str(exc)})
-            raise SystemExit(2) from exc
-
-        all_events.extend(item.into() for item in parsed.earnings_calendar)
-
-    return all_events
+        return all_events
+    finally:
+        close_func = getattr(client, "close", None)
+        if callable(close_func):
+            with contextlib.suppress(Exception):
+                close_func()
