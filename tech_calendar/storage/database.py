@@ -84,12 +84,18 @@ class Database:
                     eps_estimate REAL,
                     revenue_estimate REAL,
                     source TEXT,
+                    source_ticker TEXT,
                     created_at TEXT NOT NULL,
                     updated_at TEXT NOT NULL,
                     PRIMARY KEY (ticker, fiscal_year, quarter)
                 )
                 """
             )
+            # Migrate: add source_ticker column if upgrading from older schema.
+            self.conn.execute("ALTER TABLE earnings ADD COLUMN source_ticker TEXT")
             self.conn.commit()
+        except sqlite3.OperationalError:
+            # Column already exists — ignore.
+            pass
         except sqlite3.Error as exc:
             raise StorageError(f"failed to initialize schema: {exc}") from exc
