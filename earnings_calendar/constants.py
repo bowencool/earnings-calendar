@@ -28,3 +28,11 @@ DEFAULT_CONFIG_CANDIDATES: tuple[str, ...] = ("config.yaml", "config.yml")
 CONFIG_DIR_NAME: str = "earnings-calendar"
 
 UID_VERSION: str = "v1"
+
+# Earnings reporting time slots (Eastern Time)
+EARNINGS_HOUR_BEFORE: str = "bmo"   # Finnhub: Before Market Open
+EARNINGS_HOUR_AFTER: str = "amc"    # Finnhub: After Market Close
+EARNINGS_HOUR_BEFORE_START: tuple[int, int] = (7, 0)   # 7:00 AM ET
+EARNINGS_HOUR_BEFORE_END: tuple[int, int] = (9, 0)     # 9:00 AM ET
+EARNINGS_HOUR_AFTER_START: tuple[int, int] = (16, 30)   # 4:30 PM ET
+EARNINGS_HOUR_AFTER_END: tuple[int, int] = (18, 30)     # 6:30 PM ET

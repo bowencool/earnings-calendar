@@ -69,6 +69,49 @@ def make_all_day_event(
     return event
 
 
+def make_timed_event(
+    event_date: date_type, *, uid: str, name: str, description: str, hour: str
+) -> Event:
+    """
+    Create a timed event based on the earnings reporting hour.
+
+    Maps ``hour`` values (e.g. "before", "after") to specific time windows
+    in the exchange timezone. Falls back to an all-day event when the hour
+    is not recognised.
+    """
+    from earnings_calendar.constants import (
+        EARNINGS_HOUR_AFTER,
+        EARNINGS_HOUR_AFTER_END,
+        EARNINGS_HOUR_AFTER_START,
+        EARNINGS_HOUR_BEFORE,
+        EARNINGS_HOUR_BEFORE_END,
+        EARNINGS_HOUR_BEFORE_START,
+    )
+
+    tz = ZoneInfo(EXCHANGE_TZ)
+    mapping = {
+        EARNINGS_HOUR_BEFORE: (EARNINGS_HOUR_BEFORE_START, EARNINGS_HOUR_BEFORE_END),
+        EARNINGS_HOUR_AFTER: (EARNINGS_HOUR_AFTER_START, EARNINGS_HOUR_AFTER_END),
+    }
+
+    slot = mapping.get(hour.lower()) if isinstance(hour, str) else None
+    if slot is None:
+        # Unrecognised hour — fall back to an all-day event.
+        return make_all_day_event(event_date, uid=uid, name=name, description=description)
+
+    (start_h, start_m), (end_h, end_m) = slot
+    begin = datetime.combine(event_date, time(start_h, start_m)).replace(tzinfo=tz)
+    end = datetime.combine(event_date, time(end_h, end_m)).replace(tzinfo=tz)
+
+    event = Event()
+    event.uid = uid
+    event.name = name
+    event.begin = begin
+    event.end = end
+    event.description = description
+    return event
+
+
 def _all_day_begin_local(d: date_type) -> datetime:
     return datetime.combine(d, time.min).replace(tzinfo=ZoneInfo(EXCHANGE_TZ))
 

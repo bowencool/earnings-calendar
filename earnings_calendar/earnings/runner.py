@@ -6,7 +6,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 from earnings_calendar.api_keys import resolve_api_key
-from earnings_calendar.calendar import CalendarMetadata, build_and_write_calendar, make_all_day_event
+from earnings_calendar.calendar import CalendarMetadata, build_and_write_calendar, make_all_day_event, make_timed_event
 from earnings_calendar.config import AppConfig
 from earnings_calendar.constants import ENV_FINNHUB_API_KEY
 from earnings_calendar.earnings.finnhub_client import fetch_finnhub_earnings
@@ -63,15 +63,26 @@ def run_earnings(config: AppConfig, *, today: date | None = None) -> Path:
         description=config.earnings.calendar.description,
     )
 
-    out_path = build_and_write_calendar(
-        calendar_events,
-        metadata,
-        lambda ev, relcalid: make_all_day_event(
+    def _build_event(ev, relcalid):
+        if ev.hour:
+            return make_timed_event(
+                ev.date,
+                uid=ev.uid(relcalid),
+                name=ev.name(),
+                description=ev.description(),
+                hour=ev.hour,
+            )
+        return make_all_day_event(
             ev.date,
             uid=ev.uid(relcalid),
             name=ev.name(),
             description=ev.description(),
-        ),
+        )
+
+    out_path = build_and_write_calendar(
+        calendar_events,
+        metadata,
+        _build_event,
         config.earnings.calendar.ics_path,
     )
 

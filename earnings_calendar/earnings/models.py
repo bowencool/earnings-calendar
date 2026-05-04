@@ -26,6 +26,7 @@ class EarningsEvent:
     revenue_estimate: float | None = None
     source: str | None = None
     source_ticker: str | None = None
+    hour: str | None = None
 
     def event_year(self) -> int:
         """
@@ -57,11 +58,23 @@ class EarningsEvent:
             f"Fiscal Qtr: {self.quarter or '-'}",
             f"Estimate EPS: {self.eps_estimate if self.eps_estimate is not None else '-'}",
             f"Est. Revenue: {_format_revenue(self.revenue_estimate)}",
-            f"Source: {self.source or '-'}",
         ]
+        if self.hour:
+            details.append(f"Report Time: {_format_hour(self.hour)}")
+        details.append(f"Source: {self.source or '-'}")
         if self.source_ticker and self.source_ticker != self.ticker:
             details.append(f"Source Symbol: {self.source_ticker}")
         return "\n".join(details)
+
+
+def _format_hour(hour: str | None) -> str:
+    """
+    Return a human-readable label for the earnings reporting hour.
+    """
+    if hour is None:
+        return "-"
+    mapping = {"bmo": "Before Market Open", "amc": "After Market Close"}
+    return mapping.get(hour.lower(), hour) if isinstance(hour, str) else "-"
 
 
 def _format_revenue(value: float | int | str | None) -> str:

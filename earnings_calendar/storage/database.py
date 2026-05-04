@@ -95,6 +95,9 @@ class Database:
             # Migrate: add source_ticker column if upgrading from older schema.
             with contextlib.suppress(sqlite3.OperationalError):
                 self.conn.execute("ALTER TABLE earnings ADD COLUMN source_ticker TEXT")
+            # Migrate: add event_hour column for timed earnings events.
+            with contextlib.suppress(sqlite3.OperationalError):
+                self.conn.execute("ALTER TABLE earnings ADD COLUMN event_hour TEXT")
             self.conn.commit()
         except sqlite3.Error as exc:
             raise StorageError(f"failed to initialize schema: {exc}") from exc

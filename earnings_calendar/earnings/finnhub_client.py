@@ -66,6 +66,7 @@ class FinnhubEarningsItem(BaseModel):
             revenue_estimate=self.revenue_estimate,
             source="Finnhub",
             source_ticker=self.symbol.strip().upper(),
+            hour=self.hour,
         )
 
 
