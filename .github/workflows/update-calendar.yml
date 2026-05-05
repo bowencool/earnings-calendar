@@ -54,5 +54,5 @@ jobs:
 
           cd "$WORKDIR"
           git add "$FILE"
-          git commit -m "publish: calendar $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit -m "publish: calendar $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           git push -f origin HEAD:"$BRANCH"
