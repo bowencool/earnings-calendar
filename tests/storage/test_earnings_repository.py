@@ -5,6 +5,7 @@ from datetime import date
 import pytest
 
 from earnings_calendar.earnings.models import EarningsEvent
+from earnings_calendar.exceptions import StorageError
 from earnings_calendar.storage.earnings_repository import EarningsRepository
 
 
@@ -106,3 +107,38 @@ def test_sync_snapshot_rejects_reversed_date_range(connection: sqlite3.Connectio
             start_date=date(2026, 8, 1),
             end_date=date(2026, 7, 31),
         )
+
+
+def test_sync_snapshot_rolls_back_upserts_when_stale_deletion_fails(
+    connection: sqlite3.Connection,
+) -> None:
+    repository = EarningsRepository(connection)
+    repository.save_events(
+        [
+            event("AAPL", date(2026, 7, 20)),
+            event("MSFT", date(2026, 7, 21)),
+        ]
+    )
+    connection.execute(
+        """
+        CREATE TRIGGER reject_msft_delete
+        BEFORE DELETE ON earnings
+        WHEN OLD.ticker = 'MSFT'
+        BEGIN
+            SELECT RAISE(ABORT, 'delete rejected');
+        END
+        """
+    )
+
+    with pytest.raises(StorageError, match="failed to synchronize earnings snapshot"):
+        repository.sync_snapshot(
+            [event("AAPL", date(2026, 7, 25))],
+            configured_tickers=["AAPL", "MSFT"],
+            start_date=date(2026, 7, 1),
+            end_date=date(2026, 7, 31),
+        )
+
+    assert identities(connection) == {
+        ("AAPL", 2026, 1, "2026-07-20"),
+        ("MSFT", 2026, 1, "2026-07-21"),
+    }

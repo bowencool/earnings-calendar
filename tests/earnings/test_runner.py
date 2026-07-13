@@ -34,9 +34,10 @@ def test_run_earnings_syncs_empty_snapshot(monkeypatch, tmp_path):
     monkeypatch.setattr("earnings_calendar.earnings.runner.fetch_finnhub_earnings", Mock(return_value=[]))
     monkeypatch.setattr("earnings_calendar.earnings.runner.Database", Mock(return_value=database))
     monkeypatch.setattr("earnings_calendar.earnings.runner.EarningsRepository", Mock(return_value=repository))
+    writer = Mock(return_value=str(config.earnings.calendar.ics_path))
     monkeypatch.setattr(
         "earnings_calendar.earnings.runner.build_and_write_calendar",
-        Mock(return_value=str(config.earnings.calendar.ics_path)),
+        writer,
     )
     repository.list_for_calendar.return_value = []
 
@@ -48,6 +49,8 @@ def test_run_earnings_syncs_empty_snapshot(monkeypatch, tmp_path):
         start_date=date(2026, 7, 3),
         end_date=date(2026, 9, 11),
     )
+    repository.list_for_calendar.assert_called_once_with(current_year=2026, retention_years=5)
+    assert writer.call_args.args[0] == []
 
 
 def test_run_earnings_only_writes_events_for_configured_tickers(monkeypatch, tmp_path):
@@ -70,4 +73,10 @@ def test_run_earnings_only_writes_events_for_configured_tickers(monkeypatch, tmp
 
     run_earnings(config, today=date(2026, 7, 13))
 
+    repository.sync_snapshot.assert_called_once_with(
+        [],
+        configured_tickers=["AAPL"],
+        start_date=date(2026, 7, 3),
+        end_date=date(2026, 9, 11),
+    )
     assert writer.call_args.args[0] == [active_event]
