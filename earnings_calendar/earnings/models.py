@@ -47,7 +47,10 @@ class EarningsEvent:
         """
         Build the event name.
         """
-        return f"{self.ticker} Q{self.quarter} Earnings"
+        name = f"{self.ticker} Q{self.quarter} Earnings"
+        if self.hour and self.hour.lower() in {"bmo", "amc"}:
+            return f"{name} ({_format_hour(self.hour)})"
+        return name
 
     def description(self) -> str:
         """
