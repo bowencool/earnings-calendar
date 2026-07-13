@@ -51,11 +51,18 @@ def run_earnings(config: AppConfig, *, today: date | None = None) -> Path:
 
     with Database(db_path) as db:
         earnings_repo = EarningsRepository(db.connection)
-        earnings_repo.save_events(selected_events)
+        earnings_repo.sync_snapshot(
+            selected_events,
+            configured_tickers=config.earnings.tickers,
+            start_date=start,
+            end_date=end,
+        )
         calendar_events = earnings_repo.list_for_calendar(
             current_year=reference_date.year,
             retention_years=config.earnings.calendar.retention_years,
         )
+        active_tickers = set(config.earnings.tickers)
+        calendar_events = [event for event in calendar_events if event.ticker.upper() in active_tickers]
 
     metadata = CalendarMetadata(
         name=config.earnings.calendar.name,
