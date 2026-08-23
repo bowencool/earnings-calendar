@@ -26,8 +26,6 @@ earnings:
       "RKLB",
       "OKLO",
       "HSAI",
-      "PDD",
-      "XPEV",
     ]
   days_ahead: 60
   days_past: 10
