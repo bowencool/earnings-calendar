@@ -1,0 +1,95 @@
+BEGIN:VCALENDAR
+X-WR-CALNAME:Earnings Calendar
+X-WR-RELCALID:earnings.calendar.earnings
+X-WR-CALDESC:Earnings dates for selected tickers.
+VERSION:2.0
+PRODID:ics.py - http://git.io/lLljaA
+BEGIN:VEVENT
+DESCRIPTION:Ticker: AMD\nFiscal Qtr: 3\nEstimate EPS: 1.9543\nEst. Revenue: 13.20 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261102T233000Z
+DTSTART:20261102T213000Z
+SUMMARY:AMD Q3 Earnings (After Market Close)
+UID:v1-59039d19b7d6e1c6ec02c554d4db83b0e4ec3b28d85178c4a4c3f020238c53f2@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20261104
+DESCRIPTION:Ticker: NVO\nFiscal Qtr: 3\nEstimate EPS: 5.0898\nEst. Revenue: 73.83 B\nSource: Finnhub\nSource Symbol: NOVO B.CO
+SUMMARY:NVO Q3 Earnings
+UID:v1-df74d7bb64d961142993ffd90451f08f19b8c7619ec193ff89587eb5393f4a1e@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: KO\nFiscal Qtr: 3\nEstimate EPS: 0.9049\nEst. Revenue: 13.28 B\nReport Time: Before Market Open\nSource: Finnhub
+DTEND:20261019T130000Z
+DTSTART:20261019T110000Z
+SUMMARY:KO Q3 Earnings (Before Market Open)
+UID:v1-5280d5a3d05f59af95496d0a8b2b3c0b4b30d5c57f3aef165147c90c88568033@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: AMZN\nFiscal Qtr: 3\nEstimate EPS: 1.9928\nEst. Revenue: 206.37 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261028T223000Z
+DTSTART:20261028T203000Z
+SUMMARY:AMZN Q3 Earnings (After Market Close)
+UID:v1-0acc5cbc349bfc4467242efdfd18dffdee9fc08486b98c656c4d61c0c8c47c87@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20261030
+DESCRIPTION:Ticker: BRK.B\nFiscal Qtr: 3\nEstimate EPS: 8467.0628\nEst. Revenue: 99.76 B\nSource: Finnhub\nSource Symbol: BRK.A
+SUMMARY:BRK.B Q3 Earnings
+UID:v1-59ac4f21650cdd50c950c83f847ae01499cf27fb803eae34aafe434aa0237f22@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: TSLA\nFiscal Qtr: 3\nEstimate EPS: 0.4451\nEst. Revenue: 28.29 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261020T223000Z
+DTSTART:20261020T203000Z
+SUMMARY:TSLA Q3 Earnings (After Market Close)
+UID:v1-3d335247a0da3fb60d4438f1164587dac51bcc829d52c59c05c987522709456f@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: TSM\nFiscal Qtr: 3\nEstimate EPS: 28.9619\nEst. Revenue: 1.48 T\nReport Time: After Market Close\nSource: Finnhub\nSource Symbol: 2330.TW
+DTEND:20261014T223000Z
+DTSTART:20261014T203000Z
+SUMMARY:TSM Q3 Earnings (After Market Close)
+UID:v1-dfc5d4ed1514d8ee52523efcb9c6adc91ea2b1c6a3b1fe5b273a08f63bd3c61b@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: META\nFiscal Qtr: 3\nEstimate EPS: 6.6602\nEst. Revenue: 64.56 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261027T223000Z
+DTSTART:20261027T203000Z
+SUMMARY:META Q3 Earnings (After Market Close)
+UID:v1-f939089023158c6d911b22e6842045e4ddf2a70fbac754151b0d8de859cd48a2@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: GOOGL\nFiscal Qtr: 3\nEstimate EPS: 3.1057\nEst. Revenue: 130.96 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261027T223000Z
+DTSTART:20261027T203000Z
+SUMMARY:GOOGL Q3 Earnings (After Market Close)
+UID:v1-82d40a03cb91b8a647aeadf51aa2fcb3e6ade5b122933ca2bfe915c320082c7e@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: QCOM\nFiscal Qtr: 4\nEstimate EPS: 2.202\nEst. Revenue: 10.33 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261103T233000Z
+DTSTART:20261103T213000Z
+SUMMARY:QCOM Q4 Earnings (After Market Close)
+UID:v1-7105a883b4bde4f58f801a268c3b68d3920bb8710177b7240a337ede49d4bfe9@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: AAPL\nFiscal Qtr: 4\nEstimate EPS: 2.0202\nEst. Revenue: 115.06 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261028T223000Z
+DTSTART:20261028T203000Z
+SUMMARY:AAPL Q4 Earnings (After Market Close)
+UID:v1-168fe393bcfd886eb8db4fbe84fe4fc27f78df30bb7dd8b18027ce6a977cdf3f@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: INTC\nFiscal Qtr: 3\nEstimate EPS: 0.3918\nEst. Revenue: 16.72 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261021T223000Z
+DTSTART:20261021T203000Z
+SUMMARY:INTC Q3 Earnings (After Market Close)
+UID:v1-578c476c0902b7792c685d18a8f8e138611030a231a58a3b15942b8c3575cfc0@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20261027
+DESCRIPTION:Ticker: MSFT\nFiscal Qtr: 1\nEstimate EPS: 4.8236\nEst. Revenue: 92.46 B\nSource: Finnhub
+SUMMARY:MSFT Q1 Earnings
+UID:v1-f9decb5b9632426ed143581ecff93e915500cef0df62e82d651b618704c0b3fa@earnings.calendar.earnings
+END:VEVENT
+END:VCALENDAR
