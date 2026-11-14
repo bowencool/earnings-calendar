@@ -1,0 +1,70 @@
+BEGIN:VCALENDAR
+X-WR-CALNAME:Earnings Calendar
+X-WR-RELCALID:earnings.calendar.earnings
+X-WR-CALDESC:Earnings dates for selected tickers.
+VERSION:2.0
+PRODID:ics.py - http://git.io/lLljaA
+BEGIN:VEVENT
+DESCRIPTION:Ticker: HSAI\nFiscal Qtr: 3\nEstimate EPS: 1.2175\nEst. Revenue: 1.06 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261110T233000Z
+DTSTART:20261110T213000Z
+SUMMARY:HSAI Q3 Earnings (After Market Close)
+UID:v1-7732b27d61884e642d81131661bd9fda0e524e67f6e5be7f5435227ba25a9192@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: NVO\nFiscal Qtr: 3\nEstimate EPS: 4.8649\nEst. Revenue: 74.31 B\nReport Time: Before Market Open\nSource: Finnhub\nSource Symbol: NOVO B.CO
+DTEND:20261104T140000Z
+DTSTART:20261104T120000Z
+SUMMARY:NVO Q3 Earnings (Before Market Open)
+UID:v1-df74d7bb64d961142993ffd90451f08f19b8c7619ec193ff89587eb5393f4a1e@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: TSM\nFiscal Qtr: 4\nEstimate EPS: 33.4763\nEst. Revenue: 1.72 T\nReport Time: Before Market Open\nSource: Finnhub\nSource Symbol: 2330.TW
+DTEND:20270113T140000Z
+DTSTART:20270113T120000Z
+SUMMARY:TSM Q4 Earnings (Before Market Open)
+UID:v1-653a8d33198f7fbbabd2d65fa60b76c0353a88f037263386e64b96080c2eae14@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: OKLO\nFiscal Qtr: 3\nEstimate EPS: -0.2509\nEst. Revenue: 1.0 M\nReport Time: Before Market Open\nSource: Finnhub
+DTEND:20261106T140000Z
+DTSTART:20261106T120000Z
+SUMMARY:OKLO Q3 Earnings (Before Market Open)
+UID:v1-ef53049814f32afb99074acab6751d39ac55692b7137198214865d4acd205ce5@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: BRK.B\nFiscal Qtr: 3\nEstimate EPS: 9253.7737\nEst. Revenue: 99.78 B\nReport Time: Before Market Open\nSource: Finnhub\nSource Symbol: BRK.A
+DTEND:20261107T140000Z
+DTSTART:20261107T120000Z
+SUMMARY:BRK.B Q3 Earnings (Before Market Open)
+UID:v1-59ac4f21650cdd50c950c83f847ae01499cf27fb803eae34aafe434aa0237f22@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: BABA\nFiscal Qtr: 2\nEstimate EPS: 11.3861\nEst. Revenue: 275.21 B\nReport Time: Before Market Open\nSource: Finnhub
+DTEND:20261119T140000Z
+DTSTART:20261119T120000Z
+SUMMARY:BABA Q2 Earnings (Before Market Open)
+UID:v1-82e10c72256421b5c151c05fd62a1ecf26cd62ba7eae2c0d5dedb124fc34ed5d@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: QCOM\nFiscal Qtr: 4\nEstimate EPS: 2.2012\nEst. Revenue: 10.31 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261104T233000Z
+DTSTART:20261104T213000Z
+SUMMARY:QCOM Q4 Earnings (After Market Close)
+UID:v1-7105a883b4bde4f58f801a268c3b68d3920bb8710177b7240a337ede49d4bfe9@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: RKLB\nFiscal Qtr: 3\nEstimate EPS: -0.0714\nEst. Revenue: 260.8 M\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261109T233000Z
+DTSTART:20261109T213000Z
+SUMMARY:RKLB Q3 Earnings (After Market Close)
+UID:v1-77a91bf38b83c9f3b516ca0a2ad9bf0eb732c62e501c339cbeb040484e8bd194@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: NVDA\nFiscal Qtr: 3\nEstimate EPS: 2.5225\nEst. Revenue: 111.20 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261117T233000Z
+DTSTART:20261117T213000Z
+SUMMARY:NVDA Q3 Earnings (After Market Close)
+UID:v1-496f92d948e3cb96b77566305c6dd4d99a180ad2a73534c09760b1e6f2ef8132@earnings.calendar.earnings
+END:VEVENT
+END:VCALENDAR
