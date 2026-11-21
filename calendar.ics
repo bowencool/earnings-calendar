@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+X-WR-CALNAME:Earnings Calendar
+X-WR-RELCALID:earnings.calendar.earnings
+X-WR-CALDESC:Earnings dates for selected tickers.
+VERSION:2.0
+PRODID:ics.py - http://git.io/lLljaA
+BEGIN:VEVENT
+DESCRIPTION:Ticker: BABA\nFiscal Qtr: 2\nEstimate EPS: 11.3861\nEst. Revenue: 275.21 B\nReport Time: Before Market Open\nSource: Finnhub
+DTEND:20261119T140000Z
+DTSTART:20261119T120000Z
+SUMMARY:BABA Q2 Earnings (Before Market Open)
+UID:v1-82e10c72256421b5c151c05fd62a1ecf26cd62ba7eae2c0d5dedb124fc34ed5d@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: INTC\nFiscal Qtr: 4\nEstimate EPS: 0.2541\nEst. Revenue: 15.85 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20270120T233000Z
+DTSTART:20270120T213000Z
+SUMMARY:INTC Q4 Earnings (After Market Close)
+UID:v1-7fd480b2e654c2b49ba0c582e81d96e8e28079698534e57378b6c1e2a7697b4e@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: TSM\nFiscal Qtr: 4\nEstimate EPS: 33.4763\nEst. Revenue: 1.72 T\nReport Time: Before Market Open\nSource: Finnhub\nSource Symbol: 2330.TW
+DTEND:20270113T140000Z
+DTSTART:20270113T120000Z
+SUMMARY:TSM Q4 Earnings (Before Market Open)
+UID:v1-653a8d33198f7fbbabd2d65fa60b76c0353a88f037263386e64b96080c2eae14@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: NVDA\nFiscal Qtr: 3\nEstimate EPS: 2.525\nEst. Revenue: 111.28 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20261117T233000Z
+DTSTART:20261117T213000Z
+SUMMARY:NVDA Q3 Earnings (After Market Close)
+UID:v1-496f92d948e3cb96b77566305c6dd4d99a180ad2a73534c09760b1e6f2ef8132@earnings.calendar.earnings
+END:VEVENT
+END:VCALENDAR
