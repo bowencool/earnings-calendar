@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+X-WR-CALNAME:Earnings Calendar
+X-WR-RELCALID:earnings.calendar.earnings
+X-WR-CALDESC:Earnings dates for selected tickers.
+VERSION:2.0
+PRODID:ics.py - http://git.io/lLljaA
+BEGIN:VEVENT
+DESCRIPTION:Ticker: TSLA\nFiscal Qtr: 4\nEstimate EPS: 0.4629\nEst. Revenue: 29.64 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20270126T233000Z
+DTSTART:20270126T213000Z
+SUMMARY:TSLA Q4 Earnings (After Market Close)
+UID:v1-d6e8f44959e6a4a2a0eda3c05335b1870a3ad2100c757fafb2abc22d05823d80@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: TSM\nFiscal Qtr: 4\nEstimate EPS: 33.4763\nEst. Revenue: 1.72 T\nReport Time: Before Market Open\nSource: Finnhub\nSource Symbol: 2330.TW
+DTEND:20270113T140000Z
+DTSTART:20270113T120000Z
+SUMMARY:TSM Q4 Earnings (Before Market Open)
+UID:v1-653a8d33198f7fbbabd2d65fa60b76c0353a88f037263386e64b96080c2eae14@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: BABA\nFiscal Qtr: 2\nEstimate EPS: 11.3861\nEst. Revenue: 275.21 B\nReport Time: Before Market Open\nSource: Finnhub
+DTEND:20261119T140000Z
+DTSTART:20261119T120000Z
+SUMMARY:BABA Q2 Earnings (Before Market Open)
+UID:v1-82e10c72256421b5c151c05fd62a1ecf26cd62ba7eae2c0d5dedb124fc34ed5d@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: META\nFiscal Qtr: 4\nEstimate EPS: 8.5681\nEst. Revenue: 76.72 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20270126T233000Z
+DTSTART:20270126T213000Z
+SUMMARY:META Q4 Earnings (After Market Close)
+UID:v1-db692a38b11ad5f8d610cc1657f92238c516a9f59c629c3c6d089c8f03a99bb4@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20270126
+DESCRIPTION:Ticker: MSFT\nFiscal Qtr: 2\nEstimate EPS: 4.9626\nEst. Revenue: 98.63 B\nSource: Finnhub
+SUMMARY:MSFT Q2 Earnings
+UID:v1-f3401682881cb5654cb7ef8c47d14a265ab891f32bd066dd37a221a141d83d53@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20270127
+DESCRIPTION:Ticker: AAPL\nFiscal Qtr: 1\nEstimate EPS: 2.9588\nEst. Revenue: 159.49 B\nSource: Finnhub
+SUMMARY:AAPL Q1 Earnings
+UID:v1-b1e12bdb89a721a703446f57242851843218285cb0331b5a6ce506048a9fb56b@earnings.calendar.earnings
+END:VEVENT
+BEGIN:VEVENT
+DESCRIPTION:Ticker: INTC\nFiscal Qtr: 4\nEstimate EPS: 0.2541\nEst. Revenue: 15.85 B\nReport Time: After Market Close\nSource: Finnhub
+DTEND:20270120T233000Z
+DTSTART:20270120T213000Z
+SUMMARY:INTC Q4 Earnings (After Market Close)
+UID:v1-7fd480b2e654c2b49ba0c582e81d96e8e28079698534e57378b6c1e2a7697b4e@earnings.calendar.earnings
+END:VEVENT
+END:VCALENDAR
